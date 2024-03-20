@@ -1,3 +1,3 @@
 ## Скриншоты
 
-![Скриншот 1](screenshots/screenshot1.png)
+![Скриншот 1](screenshots/erd.png)
