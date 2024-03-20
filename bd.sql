@@ -78,8 +78,8 @@ DROP TABLE IF EXISTS `order_details`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_details` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `products_id` int NOT NULL,
   `orders_id` int NOT NULL,
+  `products_id` int NOT NULL,
   `quantity` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_details_products1_idx` (`products_id`),
@@ -95,7 +95,7 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (1,1,1,1),(2,2,1,2),(3,1,2,3);
+INSERT INTO `order_details` VALUES (1,1,1,1),(2,1,2,2),(3,2,1,1);
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,4 +255,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-20 22:09:01
+-- Dump completed on 2024-03-20 23:37:11
