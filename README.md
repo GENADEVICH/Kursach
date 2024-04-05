@@ -15,7 +15,7 @@ VALUES ('Xiaomi Redmi Note 10', 'Мощный смартфон по привле
 ```
 2. Поиск продукта по ключевому слову:
 ```Mysql
-SELECT * FROM products WHERE name LIKE '%ключевое_слово%';
+SELECT * FROM products WHERE name LIKE '%MacBook Pro%';
 ```
 
 3. Создание заказа покупателем:
