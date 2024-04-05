@@ -6,8 +6,13 @@
 
 1. Добавление нового продукта в каталог:
 ```Mysql
-INSERT INTO products (name, description, price, specifications, quantity, manufacturers_id, product_categories_id) 
-VALUES ('Название продукта', 'Описание продукта', 99.99, 'Спецификации продукта', 100, 1, 1);
+INSERT INTO products 
+(name, description, 
+price, specifications, 
+quantity, manufacturers_id, 
+product_categories_id) 
+VALUES ('Название продукта', 'Описание продукта',
+ 99.99, 'Спецификации продукта', 100, 1, 1);
 ```
 2. Поиск продукта по ключевому слову:
 ```Mysql
