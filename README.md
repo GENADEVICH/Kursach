@@ -7,12 +7,11 @@
 1. Добавление нового продукта в каталог:
 ```Mysql
 INSERT INTO products 
-(name, description, 
-price, specifications, 
-quantity, manufacturers_id, 
-product_categories_id) 
-VALUES ('Название продукта', 'Описание продукта',
- 99.99, 'Спецификации продукта', 100, 1, 1);
+(name, description, price,
+ specifications, quantity,
+ manufacturers_id, product_categories_id) 
+VALUES ('Xiaomi Redmi Note 10', 'Мощный смартфон по привлекательной цене',
+ 299.99, '6.43" AMOLED дисплей, 6 ГБ RAM, 128 ГБ встроенной памяти', 80, 5, 1);
 ```
 2. Поиск продукта по ключевому слову:
 ```Mysql
