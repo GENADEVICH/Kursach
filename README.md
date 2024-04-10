@@ -34,7 +34,7 @@ SELECT * FROM orders WHERE customers_id = 1;
 
 5. Получение общего количества продуктов на складе:
 ```Mysql
-SELECT SUM(quantity) AS total_quantity FROM warehouse;
+SELECT SUM(quantity) AS total_quantity FROM reserves;
 ```
 
 
