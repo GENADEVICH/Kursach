@@ -89,7 +89,7 @@ CREATE TABLE `order_details` (
   KEY `fk_order_details_orders1_idx` (`orders_id`),
   CONSTRAINT `fk_order_details_orders1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `fk_order_details_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (1,1,1,1,'no'),(2,2,6,1,'yes'),(3,3,1,1,'yes'),(4,4,1,1,'no'),(5,5,2,1,'yes');
+INSERT INTO `order_details` VALUES (1,1,1,1,'no'),(2,2,6,1,'yes'),(3,3,1,1,'yes'),(4,4,1,1,'no'),(5,5,2,1,'yes'),(6,6,1,12,'no'),(7,7,1,12,'no'),(8,8,1,1,'no'),(9,9,1,1,'yes');
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -157,7 +157,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_customers1_idx` (`customers_id`),
   CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'2024-04-10 15:48:05','processed'),(2,2,'2024-04-10 15:48:33','processed'),(3,1,'2024-04-10 15:57:38','processed'),(4,1,'2024-04-10 19:31:57','processed'),(5,1,'2024-04-10 19:32:17','processed');
+INSERT INTO `orders` VALUES (1,1,'2024-04-10 15:48:05','processed'),(2,2,'2024-04-10 15:48:33','processed'),(3,1,'2024-04-10 15:57:38','processed'),(4,1,'2024-04-10 19:31:57','processed'),(5,1,'2024-04-10 19:32:17','processed'),(6,1,'2024-04-10 19:53:15','processed'),(7,1,'2024-04-10 19:54:10','processed'),(8,1,'2024-04-10 20:01:43','processed'),(9,1,'2024-04-10 20:01:57','processed');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -225,7 +225,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Intel Core i9-12900K','Процессор Intel Core i9-12900K с архитектурой Alder Lake',500.00,'16 ядер, 24 потока, 3.2 GHz',18,3,1),(2,'AMD Ryzen 9 5950X','Процессор AMD Ryzen 9 5950X с архитектурой Zen 3',650.00,'16 ядер, 32 потока, 3.4 GHz',15,4,1),(3,'MSI GeForce RTX 3090','Видеокарта MSI GeForce RTX 3090',1500.00,'24GB GDDR6X, 384-bit, 1695 MHz',10,2,2),(4,'ASUS ROG Strix Z690-E','Материнская плата ASUS ROG Strix Z690-E',400.00,'Socket LGA1700, DDR5, PCIe 5.0',8,1,3),(5,'ASUS ROG Strix B560-F Gaming','атеринская плата ASUS ROG Strix B560-F Gaming',200.00,'Socket LGA1200, DDR4, PCIe 4.0',30,1,3),(6,'Corsair DOMINATOR Platinum RGB','Оперативная память Corsair DOMINATOR Platinum RGB 16GB',100.00,'DDR4, 3200 MHz',25,5,5);
+INSERT INTO `products` VALUES (1,'Intel Core i9-12900K','Процессор Intel Core i9-12900K с архитектурой Alder Lake',500.00,'16 ядер, 24 потока, 3.2 GHz',17,3,1),(2,'AMD Ryzen 9 5950X','Процессор AMD Ryzen 9 5950X с архитектурой Zen 3',650.00,'16 ядер, 32 потока, 3.4 GHz',15,4,1),(3,'MSI GeForce RTX 3090','Видеокарта MSI GeForce RTX 3090',1500.00,'24GB GDDR6X, 384-bit, 1695 MHz',10,2,2),(4,'ASUS ROG Strix Z690-E','Материнская плата ASUS ROG Strix Z690-E',400.00,'Socket LGA1700, DDR5, PCIe 5.0',8,1,3),(5,'ASUS ROG Strix B560-F Gaming','атеринская плата ASUS ROG Strix B560-F Gaming',200.00,'Socket LGA1200, DDR4, PCIe 4.0',30,1,3),(6,'Corsair DOMINATOR Platinum RGB','Оперативная память Corsair DOMINATOR Platinum RGB 16GB',100.00,'DDR4, 3200 MHz',25,5,5);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,7 +255,7 @@ CREATE TABLE `reserves` (
 
 LOCK TABLES `reserves` WRITE;
 /*!40000 ALTER TABLE `reserves` DISABLE KEYS */;
-INSERT INTO `reserves` VALUES (1,1,'WH01',52),(2,2,'WH02',24),(3,3,'WH03',42),(4,4,'WH01',37),(5,5,'WH03',76),(6,6,'WH01',42);
+INSERT INTO `reserves` VALUES (1,1,'WH01',51),(2,2,'WH02',24),(3,3,'WH03',42),(4,4,'WH01',37),(5,5,'WH03',76),(6,6,'WH01',42);
 /*!40000 ALTER TABLE `reserves` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -375,7 +375,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `make_order`(
     IN customer_id INT,
     IN product_id INT,
     IN order_quantity INT,
-    IN from_warehouse ENUM('yes', 'no')
+    IN from_reserves ENUM('yes', 'no')
 )
 BEGIN
     DECLARE order_id INT;
@@ -392,7 +392,7 @@ BEGIN
     -- Начать транзакцию
     START TRANSACTION;
 
-    IF from_warehouse = 'yes' THEN
+    IF from_reserves = 'yes' THEN
         -- Создаем новый заказ со склада
         INSERT INTO orders (customers_id, order_datetime, order_status)
         VALUES (customer_id, NOW(), 'processed');
@@ -500,4 +500,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-10 19:43:02
+-- Dump completed on 2024-04-10 20:02:43
