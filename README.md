@@ -21,7 +21,10 @@ SELECT * FROM products WHERE name LIKE '%MacBook Pro%';
 3. Создание заказа покупателем:
 ```Mysql
 INSERT INTO orders (customers_id, order_datetime, order_status)
-VALUES (1, NOW(), 'создан');
+VALUES (1, NOW(), 'processed');
+
+INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
+VALUES (7, 1, 12, 'no');
 ```
 
 4. Получение списка заказов для конкретного покупателя:
