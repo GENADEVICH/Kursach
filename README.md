@@ -36,9 +36,8 @@ SELECT * FROM orders WHERE customers_id = 1;
 ```Mysql
 SELECT SUM(quantity) AS total_quantity FROM reserves;
 ```
-
-
 ## Отдельные роли
+##
 1. роль администратора
 ```Mysql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'PaSsWoRd';
