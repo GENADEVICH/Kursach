@@ -37,4 +37,39 @@ SELECT * FROM orders WHERE customers_id = 1;
 SELECT SUM(quantity) AS total_quantity FROM reserves;
 ```
 
+## Отдельные роли
+1. роль администратора
+```Mysql
+CREATE USER 'admin'@'localhost' IDENTIFIED BY 'PaSsWoRd';
+GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+```
+2. роль менеджера
+```Mysql
+CREATE USER 'manager'@'localhost' IDENTIFIED BY 'PaSsWoRd';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON shop.products TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON shop.customers TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON shop.orders TO 'manager'@'localhost';
+GRANT SELECT, INSERT, UPDATE, DELETE ON shop.order_details TO 'manager'@'localhost';
+GRANT SELECT ON shop.manufacturers TO 'manager'@'localhost';
+GRANT SELECT ON shop.product_categories TO 'manager'@'localhost';
+GRANT SELECT ON shop.reserves TO 'manager'@'localhost';
+GRANT SELECT ON shop.warehouses TO 'manager'@'localhost';
+
+FLUSH PRIVILEGES;
+```
+3. роль клиента
+```Mysql
+CREATE USER 'customer'@'localhost';
+
+GRANT SELECT ON shop.products TO 'customer'@'localhost';
+GRANT SELECT ON shop.product_categories TO 'customer'@'localhost';
+GRANT SELECT ON shop.manufacturers TO 'customer'@'localhost';
+GRANT INSERT ON shop.orders TO 'customer'@'localhost';
+
+FLUSH PRIVILEGES;
+```
+
+
 
