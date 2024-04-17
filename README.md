@@ -37,6 +37,7 @@ SELECT * FROM orders WHERE customers_id = 1;
 SELECT SUM(quantity) AS total_quantity FROM reserves;
 ```
 
+
 ## Отдельные роли
 1. роль администратора
 ```Mysql
