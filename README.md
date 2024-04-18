@@ -29,7 +29,7 @@ VALUES (7, 1, 12, 'no');
 
 4. Получение списка заказов для конкретного покупателя:
 ```Mysql
-SELECT * FROM orders WHERE customers_id = 1;
+SELECT * FROM customers WHERE id = 1;
 ```
 
 5. Получение общего количества продуктов на складе:
