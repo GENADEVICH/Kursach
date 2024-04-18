@@ -32,7 +32,7 @@ CREATE TABLE `customers` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone_number_UNIQUE` (`phone_number`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Иван','Иванов','ул. Ленина, д. 10, г. Москва, Россия','ivan.ivanov@example.com','1234567890'),(2,'Мария','Петрова','пр. Победы, д. 15, г. Санкт-Петербург, Россия','maria.petrova@example.com','0987654321'),(3,'Анна','Сидорова','ул. Кирова, д. 5, г. Екатеринбург, Россия','anna.sidorova@example.com','555555555'),(4,'Павел','Кузнецов','пр. Ленина, д. 20, г. Новосибирск, Россия','pavel.kuznetsov@example.com','777777777');
+INSERT INTO `customers` VALUES (1,'Иван','Иванов','ул. Ленина, д. 10, г. Москва, Россия','ivan.ivanov@example.com','1234567890'),(2,'Мария','Петрова','пр. Победы, д. 15, г. Санкт-Петербург, Россия','maria.petrova@example.com','0987654321'),(3,'Анна','Сидорова','ул. Кирова, д. 5, г. Екатеринбург, Россия','anna.sidorova@example.com','555555555'),(4,'Павел','Кузнецов','пр. Ленина, д. 20, г. Новосибирск, Россия','pavel.kuznetsov@example.com','777777777'),(5,'Елена','Смирнова','ул. Гагарина, д. 25, г. Краснодар, Россия','elena.smirnova@example.com','9876543210'),(6,'Алексей','Волков','пр. Ленина, д. 30, г. Омск, Россия','alexey.volkov@example.com','555444333'),(7,'Ольга','Иванова','ул. Пушкина, д. 5, г. Владивосток, Россия','olga.ivanova@example.com','111222333');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `manufacturers` (
   `country` char(2) DEFAULT NULL,
   `website` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `manufacturers` (
 
 LOCK TABLES `manufacturers` WRITE;
 /*!40000 ALTER TABLE `manufacturers` DISABLE KEYS */;
-INSERT INTO `manufacturers` VALUES (1,'ASUS','TW','https://www.asus.com'),(2,'MSI','TW','https://www.msi.com'),(3,'Intel','US','https://www.intel.com'),(4,'AMD','US','https://www.amd.com'),(5,'Corsair','US','https://www.corsair.com');
+INSERT INTO `manufacturers` VALUES (1,'ASUS','TW','https://www.asus.com'),(2,'MSI','TW','https://www.msi.com'),(3,'Intel','US','https://www.intel.com'),(4,'AMD','US','https://www.amd.com'),(5,'Corsair','US','https://www.corsair.com'),(6,'NVIDIA','US','https://www.nvidia.com'),(7,'Samsung','KR','https://www.samsung.com');
 /*!40000 ALTER TABLE `manufacturers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,13 +83,13 @@ CREATE TABLE `order_details` (
   `orders_id` int NOT NULL,
   `products_id` int NOT NULL,
   `quantity` int unsigned NOT NULL,
-  `from_reserves` enum('yes','no') DEFAULT NULL,
+  `from_reserves` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_details_products1_idx` (`products_id`),
   KEY `fk_order_details_orders1_idx` (`orders_id`),
   CONSTRAINT `fk_order_details_orders1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `fk_order_details_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,20 +98,19 @@ CREATE TABLE `order_details` (
 
 LOCK TABLES `order_details` WRITE;
 /*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
-INSERT INTO `order_details` VALUES (1,1,1,1,'no'),(2,2,6,1,'yes'),(3,3,1,1,'yes'),(4,4,1,1,'no'),(5,5,2,1,'yes'),(6,6,1,12,'no'),(7,7,1,12,'no'),(8,8,1,1,'no'),(9,9,1,1,'yes');
 /*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `order_from_reserves_trigger` AFTER INSERT ON `order_details` FOR EACH ROW BEGIN
-    IF NEW.from_reserves = 'yes' THEN
+    IF NEW.from_reserves = true THEN
         UPDATE reserves
         SET quantity = quantity - NEW.quantity
         WHERE products_id = NEW.products_id;
@@ -157,7 +156,7 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_customers1_idx` (`customers_id`),
   CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +165,6 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,1,'2024-04-10 15:48:05','processed'),(2,2,'2024-04-10 15:48:33','processed'),(3,1,'2024-04-10 15:57:38','processed'),(4,1,'2024-04-10 19:31:57','processed'),(5,1,'2024-04-10 19:32:17','processed'),(6,1,'2024-04-10 19:53:15','processed'),(7,1,'2024-04-10 19:54:10','processed'),(8,1,'2024-04-10 20:01:43','processed'),(9,1,'2024-04-10 20:01:57','processed');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -182,7 +180,7 @@ CREATE TABLE `product_categories` (
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -191,7 +189,7 @@ CREATE TABLE `product_categories` (
 
 LOCK TABLES `product_categories` WRITE;
 /*!40000 ALTER TABLE `product_categories` DISABLE KEYS */;
-INSERT INTO `product_categories` VALUES (1,'Процессоры','Компоненты, отвечающие за обработку данных в компьютере'),(2,'Видеокарты','Устройства, обеспечивающие обработку графики на компьютере'),(3,'Материнские платы','Основная плата, на которой располагаются другие компоненты компьютера'),(4,'Жесткие диски','Устройства для хранения и чтения информации на компьютере'),(5,'Оперативная память','Быстрая оперативная память для компьютеров');
+INSERT INTO `product_categories` VALUES (1,'Процессоры','Компоненты, отвечающие за обработку данных в компьютере'),(2,'Материнские платы','Основная плата, на которой располагаются другие компоненты компьютера'),(3,'Жесткие диски','Устройства для хранения и чтения информации на компьютере'),(4,'Видеокарты','Устройства, обеспечивающие обработку графики на компьютере');
 /*!40000 ALTER TABLE `product_categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -216,7 +214,7 @@ CREATE TABLE `products` (
   KEY `fk_products_product_categories1_idx` (`product_categories_id`),
   CONSTRAINT `fk_products_manufacturers1` FOREIGN KEY (`manufacturers_id`) REFERENCES `manufacturers` (`id`),
   CONSTRAINT `fk_products_product_categories1` FOREIGN KEY (`product_categories_id`) REFERENCES `product_categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -225,7 +223,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Intel Core i9-12900K','Процессор Intel Core i9-12900K с архитектурой Alder Lake',500.00,'16 ядер, 24 потока, 3.2 GHz',17,3,1),(2,'AMD Ryzen 9 5950X','Процессор AMD Ryzen 9 5950X с архитектурой Zen 3',650.00,'16 ядер, 32 потока, 3.4 GHz',15,4,1),(3,'MSI GeForce RTX 3090','Видеокарта MSI GeForce RTX 3090',1500.00,'24GB GDDR6X, 384-bit, 1695 MHz',10,2,2),(4,'ASUS ROG Strix Z690-E','Материнская плата ASUS ROG Strix Z690-E',400.00,'Socket LGA1700, DDR5, PCIe 5.0',8,1,3),(5,'ASUS ROG Strix B560-F Gaming','атеринская плата ASUS ROG Strix B560-F Gaming',200.00,'Socket LGA1200, DDR4, PCIe 4.0',30,1,3),(6,'Corsair DOMINATOR Platinum RGB','Оперативная память Corsair DOMINATOR Platinum RGB 16GB',100.00,'DDR4, 3200 MHz',25,5,5);
+INSERT INTO `products` VALUES (1,'Intel Core i9-12900K','Процессор Intel Core i9-12900K с архитектурой Alder Lake',500.00,'16 ядер, 24 потока, 3.2 GHz',20,3,1),(2,'AMD Ryzen 9 5950X','Процессор AMD Ryzen 9 5950X с архитектурой Zen 3',650.00,'16 ядер, 32 потока, 3.4 GHz',15,4,1),(3,'MSI GeForce RTX 3090','Видеокарта MSI GeForce RTX 3090',1500.00,'24GB GDDR6X, 384-bit, 1695 MHz',10,2,4),(4,'ASUS ROG Strix Z690-E','Материнская плата ASUS ROG Strix Z690-E',400.00,'Socket LGA1700, DDR5, PCIe 5.0',8,1,2),(5,'ASUS ROG Strix B560-F Gaming','Материнская плата ASUS ROG Strix B560-F Gaming',200.00,'Socket LGA1200, DDR4, PCIe 4.0',30,1,2),(6,'Corsair DOMINATOR Platinum RGB','Оперативная память Corsair DOMINATOR Platinum RGB 16GB',100.00,'DDR4, 3200 MHz',25,5,3),(7,'NVIDIA GeForce RTX 3080','Видеокарта NVIDIA GeForce RTX 3080',1200.00,'10GB GDDR6X, 320-bit, 1710 MHz',18,6,4),(8,'Samsung 970 EVO Plus','SSD накопитель Samsung 970 EVO Plus',150.00,'NVMe M.2, 1TB, Read/Write: 3500/3300 MB/s',22,7,3);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +244,7 @@ CREATE TABLE `reserves` (
   KEY `warehouse_code_idx` (`warehouse_code`),
   CONSTRAINT `fk_warehouse_products1` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`),
   CONSTRAINT `warehouse_code` FOREIGN KEY (`warehouse_code`) REFERENCES `warehouses` (`code`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +253,7 @@ CREATE TABLE `reserves` (
 
 LOCK TABLES `reserves` WRITE;
 /*!40000 ALTER TABLE `reserves` DISABLE KEYS */;
-INSERT INTO `reserves` VALUES (1,1,'WH01',51),(2,2,'WH02',24),(3,3,'WH03',42),(4,4,'WH01',37),(5,5,'WH03',76),(6,6,'WH01',42);
+INSERT INTO `reserves` VALUES (1,1,'WH01',53),(2,2,'WH02',25),(3,3,'WH03',42),(4,4,'WH01',37),(5,5,'WH03',76),(6,6,'WH01',43);
 /*!40000 ALTER TABLE `reserves` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,7 +268,7 @@ CREATE TABLE `warehouses` (
   `code` char(4) NOT NULL,
   `location_name` varchar(255) NOT NULL,
   PRIMARY KEY (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,21 +292,33 @@ UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` FUNCTION `calculate_order_total`(product_id INT, quantity INT) RETURNS decimal(10,2)
+CREATE DEFINER=`root`@`localhost` FUNCTION `calculate_order_total`(product_id INT) RETURNS decimal(10,2)
     DETERMINISTIC
 BEGIN
+    DECLARE product_quantity INT;
+    DECLARE reserve_quantity INT;
     DECLARE product_price DECIMAL(10,2);
     DECLARE total_price DECIMAL(10,2);
 
-    SELECT price INTO product_price FROM products WHERE id = product_id;
+    -- Получаем количество и цену продукта из таблицы products
+    SELECT quantity, price INTO product_quantity, product_price FROM products WHERE id = product_id;
 
-    SET total_price = product_price * quantity;
+    -- Получаем количество товара из таблицы reserves
+    SELECT SUM(quantity) INTO reserve_quantity FROM reserves WHERE product_id = product_id;
+
+    -- Если товар не найден в таблице reserves, устанавливаем его количество 0
+    IF reserve_quantity IS NULL THEN
+        SET reserve_quantity = 0;
+    END IF;
+
+    -- Вычисляем общее количество товаров и общую стоимость
+    SET total_price = (product_quantity + reserve_quantity) * product_price;
 
     RETURN total_price;
 END ;;
@@ -321,14 +331,20 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_products_by_category`(category_name VARCHAR(255))
 BEGIN
+    -- Проверяем, существует ли категория с указанным именем
+    IF NOT EXISTS (SELECT name FROM product_categories WHERE name = category_name) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Категория не найдена';
+    END IF;
+
+    -- Если категория существует, выбираем продукты из неё
     SELECT p.id, p.name, p.description, p.price, p.quantity, c.name AS category_name
     FROM products p
     JOIN product_categories c ON p.product_categories_id = c.id
@@ -343,14 +359,18 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_products_by_manufacturer`(manufacturer_name VARCHAR(255))
 BEGIN
+    IF NOT EXISTS (SELECT name FROM manufacturers WHERE name = manufacturer_name) THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Производитель не найден';
+    END IF;
+
     SELECT p.id, p.name, p.description, p.price, p.quantity, m.name AS manufacturer_name
     FROM products p
     JOIN manufacturers m ON p.manufacturers_id = m.id
@@ -375,7 +395,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `make_order`(
     IN customer_id INT,
     IN product_id INT,
     IN order_quantity INT,
-    IN from_reserves ENUM('yes', 'no')
+    IN from_reserves BIT(1)
 )
 BEGIN
     DECLARE order_id INT;
@@ -392,7 +412,7 @@ BEGIN
     -- Начать транзакцию
     START TRANSACTION;
 
-    IF from_reserves = 'yes' THEN
+    IF from_reserves = true THEN
         -- Создаем новый заказ со склада
         INSERT INTO orders (customers_id, order_datetime, order_status)
         VALUES (customer_id, NOW(), 'processed');
@@ -402,7 +422,7 @@ BEGIN
 
         -- Добавляем детали заказа
         INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
-        VALUES (order_id, product_id, order_quantity, 'yes');
+        VALUES (order_id, product_id, order_quantity, 1);
     ELSE
         -- Уменьшаем количество продуктов в таблице products
         UPDATE products
@@ -418,7 +438,7 @@ BEGIN
 
         -- Добавляем детали заказа
         INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
-        VALUES (order_id, product_id, order_quantity, 'no');
+        VALUES (order_id, product_id, order_quantity, 0);
     END IF;
 
     -- Завершаем транзакцию
@@ -433,11 +453,11 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb3 */ ;
-/*!50003 SET character_set_results = utf8mb3 */ ;
-/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'NO_AUTO_VALUE_ON_ZERO' */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `update_product_price`(
     IN product_id INT,
@@ -481,9 +501,9 @@ DELIMITER ;
 /*!50001 SET @saved_cs_client          = @@character_set_client */;
 /*!50001 SET @saved_cs_results         = @@character_set_results */;
 /*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb3 */;
-/*!50001 SET character_set_results     = utf8mb3 */;
-/*!50001 SET collation_connection      = utf8mb3_general_ci */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `order_details_view` AS select `o`.`id` AS `order_id`,`o`.`order_datetime` AS `order_datetime`,`c`.`first_name` AS `first_name`,`c`.`last_name` AS `last_name`,`p`.`name` AS `product_name`,`od`.`quantity` AS `quantity`,`od`.`from_reserves` AS `from_reserves`,`p`.`price` AS `price` from (((`orders` `o` join `customers` `c` on((`o`.`customers_id` = `c`.`id`))) join `order_details` `od` on((`o`.`id` = `od`.`orders_id`))) join `products` `p` on((`od`.`products_id` = `p`.`id`))) */;
@@ -500,4 +520,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-10 20:02:43
+-- Dump completed on 2024-04-18 21:26:57
