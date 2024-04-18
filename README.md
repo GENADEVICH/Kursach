@@ -10,8 +10,8 @@ INSERT INTO products
 (name, description, price,
  specifications, quantity,
  manufacturers_id, product_categories_id) 
-VALUES ('Xiaomi Redmi Note 10', 'Мощный смартфон по привлекательной цене',
- 299.99, '6.43" AMOLED дисплей, 6 ГБ RAM, 128 ГБ встроенной памяти', 80, 5, 1);
+VALUES ('NVIDIA GeForce RTX 3060', 'Видеокарта NVIDIA GeForce RTX 3060',
+ 399.99, '12GB GDDR6, 192-bit, 1320 MHz', 30, 6, 4);
 ```
 2. Поиск продукта по ключевому слову:
 ```Mysql
