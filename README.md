@@ -40,7 +40,9 @@ SELECT SUM(quantity) AS total_quantity FROM reserves;
 1. роль администратора
 ```Mysql
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'PaSsWoRd';
+
 GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+
 FLUSH PRIVILEGES;
 ```
 2. роль менеджера
