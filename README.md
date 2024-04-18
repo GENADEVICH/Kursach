@@ -27,7 +27,7 @@ INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
 VALUES (7, 1, 12, 'no');
 ```
 
-4. Получение списка заказов для конкретного покупателя:
+4. Получение данных конкретного покупателя:
 ```Mysql
 SELECT * FROM customers WHERE id = 1;
 ```
