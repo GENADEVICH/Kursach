@@ -54,8 +54,8 @@ DROP TABLE IF EXISTS `manufacturers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `manufacturers` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  `country` char(2) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `country` char(2) NOT NULL,
   `website` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
@@ -151,8 +151,8 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `customers_id` int DEFAULT NULL,
-  `order_datetime` datetime DEFAULT NULL,
-  `order_status` enum('processed','created','completed','canceled') DEFAULT NULL,
+  `order_datetime` datetime NOT NULL,
+  `order_status` enum('processed','created','completed','canceled') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_orders_customers1_idx` (`customers_id`),
   CONSTRAINT `fk_orders_customers1` FOREIGN KEY (`customers_id`) REFERENCES `customers` (`id`)
@@ -177,7 +177,7 @@ DROP TABLE IF EXISTS `product_categories`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product_categories` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
@@ -204,7 +204,7 @@ CREATE TABLE `products` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
   `specifications` text,
   `quantity` int NOT NULL,
   `manufacturers_id` int NOT NULL,
@@ -520,4 +520,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-18 21:26:57
+-- Dump completed on 2024-05-19 13:34:19
