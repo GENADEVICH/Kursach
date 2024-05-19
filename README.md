@@ -1,6 +1,6 @@
 ## Скриншоты
 
-![Скриншот 1](screenshots/er1d.png)
+![Скриншот 1](screenshots/erd.png)
 
 ## Типовые запросы
 
