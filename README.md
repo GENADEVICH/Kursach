@@ -6,14 +6,13 @@
 
 **1. Получить среднюю стоимость заказа по каждому клиенту:**
 ```Mysql
-SELECT c.last_name AS фамилия, c.first_name AS имя, AVG(od.quantity * p.price) AS средняя_стоимость_заказа
+SELECT c.last_name AS фамилия, c.first_name AS имя, 
+AVG(od.quantity * p.price) AS средняя_стоимость_заказа
 FROM customers c
 LEFT JOIN orders o ON c.id = o.customers_id
 LEFT JOIN order_details od ON o.id = od.orders_id
 LEFT JOIN products p ON od.products_id = p.id
 GROUP BY c.id;
-
-
 ```
 **2. Выяснить, в каких категориях продуктов есть товары с низкими остатками (менее 10):**
 ```Mysql
