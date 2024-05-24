@@ -96,7 +96,9 @@ CREATE ROLE IF NOT EXISTS 'customer_role';
 GRANT SELECT ON shop.products TO 'customer_role';
 GRANT SELECT ON shop.product_categories TO 'customer_role';
 GRANT SELECT ON shop.manufacturers TO 'customer_role';
-GRANT INSERT ON shop.orders TO 'customer_role';
+
+-- назначение привилегий на выполнение хранимых процедур
+GRANT EXECUTE ON PROCEDURE shop.make_order TO customer_role;
 
 -- создание пользователя customer и назначение ему роли customer_role
 CREATE USER IF NOT EXISTS 'customer'@'localhost' IDENTIFIED BY 'SecurePassword';
