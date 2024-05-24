@@ -70,6 +70,8 @@ GRANT SELECT ON shop.reserves TO 'manager_role';
 GRANT SELECT ON shop.warehouses TO 'manager_role';
 
 -- назначение привилегий на выполнение хранимых процедур
+GRANT EXECUTE ON PROCEDURE shop.get_products_by_manufacturer TO 'manager_role';
+GRANT EXECUTE ON PROCEDURE shop.get_products_by_category TO 'manager_role';
 GRANT EXECUTE ON PROCEDURE shop.update_product_price TO 'manager_role';
 GRANT EXECUTE ON PROCEDURE shop.calculate_order_total TO 'manager_role';
 GRANT EXECUTE ON PROCEDURE shop.make_order TO 'manager_role';
