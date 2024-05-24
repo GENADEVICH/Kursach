@@ -102,8 +102,6 @@ GRANT EXECUTE ON PROCEDURE shop.make_order TO customer_role;
 
 -- создание пользователя customer и назначение ему роли customer_role
 CREATE USER IF NOT EXISTS 'customer'@'localhost' IDENTIFIED BY 'SecurePassword';
-
--- назначение роли customer_role пользователю customer
 GRANT 'customer_role' TO 'customer'@'localhost';
 
 -- установка роли customer_role по умолчанию для пользователя customer
