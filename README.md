@@ -57,7 +57,7 @@ FLUSH PRIVILEGES;
 2. роль менеджера
 ```Mysql
 -- создание роли manager_role
-CREATE ROLE 'manager_role';
+CREATE ROLE IF NOT EXISTS 'manager_role';
 
 -- назначение привилегий роли manager_role
 GRANT SELECT, INSERT, UPDATE, DELETE ON shop.products TO 'manager_role';
@@ -75,7 +75,7 @@ GRANT EXECUTE ON PROCEDURE shop.calculate_order_total TO 'manager_role';
 GRANT EXECUTE ON PROCEDURE shop.make_order TO 'manager_role';
 
 -- создание пользователя manager и назначение ему роли manager_role
-CREATE USER 'manager'@'localhost' IDENTIFIED BY 'PaSsWoRd';
+CREATE USER IF NOT EXISTS 'manager'@'localhost' IDENTIFIED BY 'PaSsWoRd';
 GRANT 'manager_role' TO 'manager'@'localhost';
 
 -- установка роли manager_role по умолчанию для пользователя manager
@@ -88,7 +88,7 @@ FLUSH PRIVILEGES;
 3. роль клиента
 ```Mysql
 -- создание роли customer_role
-CREATE ROLE 'customer_role';
+CREATE ROLE IF NOT EXISTS 'customer_role';
 
 -- назначение привилегий роли customer_role
 GRANT SELECT ON shop.products TO 'customer_role';
@@ -97,7 +97,7 @@ GRANT SELECT ON shop.manufacturers TO 'customer_role';
 GRANT INSERT ON shop.orders TO 'customer_role';
 
 -- создание пользователя customer и назначение ему роли customer_role
-CREATE USER 'customer'@'localhost' IDENTIFIED BY 'SecurePassword';
+CREATE USER IF NOT EXISTS 'customer'@'localhost' IDENTIFIED BY 'SecurePassword';
 
 -- назначение роли customer_role пользователю customer
 GRANT 'customer_role' TO 'customer'@'localhost';
