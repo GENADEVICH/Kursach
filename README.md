@@ -4,14 +4,13 @@
 
 ## Типовые запросы
 
-1. Добавление нового продукта в каталог:
+1. Найти клиентов, которые не сделали ни одного заказа:
 ```Mysql
-INSERT INTO products 
-(name, description, price,
- specifications, quantity,
- manufacturers_id, product_categories_id) 
-VALUES ('NVIDIA GeForce RTX 3060', 'Видеокарта NVIDIA GeForce RTX 3060',
- 399.99, '12GB GDDR6, 192-bit, 1320 MHz', 30, 6, 4);
+SELECT c.last_name AS фамилия, c.first_name AS имя
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+WHERE o.id IS NULL;
+
 ```
 2. Выяснить, в каких категориях продуктов есть товары с низкими остатками (менее 10):
 ```Mysql
