@@ -4,12 +4,15 @@
 
 ## Типовые запросы
 
-1. Найти клиентов, которые не сделали ни одного заказа:
+1. Получить среднюю стоимость заказа по каждому клиенту:
 ```Mysql
-SELECT c.last_name AS фамилия, c.first_name AS имя
+SELECT c.last_name AS фамилия, c.first_name AS имя, AVG(od.quantity * p.price) AS средняя_стоимость_заказа
 FROM customers c
-LEFT JOIN orders o ON c.id = o.customer_id
-WHERE o.id IS NULL;
+LEFT JOIN orders o ON c.id = o.customers_id
+LEFT JOIN order_details od ON o.id = od.orders_id
+LEFT JOIN products p ON od.products_id = p.id
+GROUP BY c.id;
+
 
 ```
 2. Выяснить, в каких категориях продуктов есть товары с низкими остатками (менее 10):
@@ -18,7 +21,6 @@ SELECT pc.name AS название_категории, p.name AS названи�
 FROM products p
 JOIN product_categories pc ON p.product_categories_id = pc.id
 WHERE p.quantity < 10;
-
 ```
 
 3. Найти топ-5 клиентов, сделавших наибольшее количество заказов:
@@ -29,7 +31,6 @@ JOIN orders o ON c.id = o.customers_id
 GROUP BY c.id
 ORDER BY общее_количество_заказов DESC
 LIMIT 5;
-
 ```
 
 4. Узнать среднюю цену продуктов в каждой категории:
@@ -46,7 +47,6 @@ SELECT w.location_name, COUNT(r.products_id) AS общее_количество_
 FROM warehouses w
 LEFT JOIN reserves r ON w.code = r.warehouse_code
 GROUP BY w.location_name;
-
 ```
 ## Отдельные роли
 1. Роль: Администратор
