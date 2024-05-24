@@ -4,7 +4,7 @@
 
 ## Типовые запросы
 
-1. Получить среднюю стоимость заказа по каждому клиенту:
+**1. Получить среднюю стоимость заказа по каждому клиенту:**
 ```Mysql
 SELECT c.last_name AS фамилия, c.first_name AS имя, AVG(od.quantity * p.price) AS средняя_стоимость_заказа
 FROM customers c
@@ -15,7 +15,7 @@ GROUP BY c.id;
 
 
 ```
-2. Выяснить, в каких категориях продуктов есть товары с низкими остатками (менее 10):
+**2. Выяснить, в каких категориях продуктов есть товары с низкими остатками (менее 10):**
 ```Mysql
 SELECT pc.name AS название_категории, p.name AS название_продукта, p.quantity AS количество
 FROM products p
@@ -23,7 +23,7 @@ JOIN product_categories pc ON p.product_categories_id = pc.id
 WHERE p.quantity < 10;
 ```
 
-3. Найти топ-5 клиентов, сделавших наибольшее количество заказов:
+**3. Найти топ-5 клиентов, сделавших наибольшее количество заказов:**
 ```Mysql
 SELECT c.first_name, c.last_name, COUNT(o.id) AS общее_количество_заказов
 FROM customers c
@@ -33,7 +33,7 @@ ORDER BY общее_количество_заказов DESC
 LIMIT 5;
 ```
 
-4. Узнать среднюю цену продуктов в каждой категории:
+**4. Узнать среднюю цену продуктов в каждой категории:**
 ```Mysql
 SELECT pc.name AS название_категории, AVG(p.price) AS средняя_цена
 FROM products p
@@ -41,7 +41,7 @@ JOIN product_categories pc ON p.product_categories_id = pc.id
 GROUP BY pc.name;
 ```
 
-5. Получить общее количество продуктов в каждом складе:
+**5. Получить общее количество продуктов в каждом складе:**
 ```Mysql
 SELECT w.location_name, COUNT(r.products_id) AS общее_количество_продуктов
 FROM warehouses w
@@ -49,7 +49,7 @@ LEFT JOIN reserves r ON w.code = r.warehouse_code
 GROUP BY w.location_name;
 ```
 ## Отдельные роли
-1. Роль: Администратор
+**1. Роль: Администратор**
 ```Mysql
 -- создание роли admin_role
 CREATE ROLE IF NOT EXISTS admin_role; 
@@ -66,7 +66,7 @@ SET DEFAULT ROLE admin_role TO 'admin'@'localhost';
 
 FLUSH PRIVILEGES;
 ```
-2. Роль: Менеджер
+**2. Роль: Менеджер**
 ```Mysql
 -- создание роли manager_role
 CREATE ROLE IF NOT EXISTS 'manager_role';
@@ -99,7 +99,7 @@ SET DEFAULT ROLE 'manager_role' FOR 'manager'@'localhost';
 FLUSH PRIVILEGES;
 
 ```
-3. Роль: Клиент
+**3. Роль: Клиент**
 ```Mysql
 -- создание роли customer_role
 CREATE ROLE IF NOT EXISTS 'customer_role';
