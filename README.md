@@ -42,7 +42,8 @@ GROUP BY pc.name;
 
 **5. Получить общее количество продуктов в каждом складе:**
 ```Mysql
-SELECT w.location_name, COUNT(r.products_id) AS общее_количество_продуктов
+SELECT w.location_name AS склад, 
+SUM(r.quantity) AS общее_количество_продуктов
 FROM warehouses w
 LEFT JOIN reserves r ON w.code = r.warehouse_code
 GROUP BY w.location_name;
