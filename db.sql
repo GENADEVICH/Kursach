@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
--- Host: localhost    Database: shop
+-- Host: localhost    Database: dd
 -- ------------------------------------------------------
--- Server version	8.0.36
+-- Server version	8.0.37
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -83,6 +83,7 @@ CREATE TABLE `order_details` (
   `orders_id` int NOT NULL,
   `products_id` int NOT NULL,
   `quantity` int unsigned NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
   `from_reserves` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_details_products1_idx` (`products_id`),
@@ -110,10 +111,10 @@ UNLOCK TABLES;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `order_from_reserves_trigger` AFTER INSERT ON `order_details` FOR EACH ROW BEGIN
-    IF NEW.from_reserves = true THEN
-        UPDATE reserves
-        SET quantity = quantity - NEW.quantity
-        WHERE products_id = NEW.products_id;
+    IF NEW.from_reserves = 1 THEN
+        UPDATE `reserves`
+        SET `quantity` = `quantity` - NEW.quantity
+        WHERE `products_id` = NEW.products_id;
     END IF;
 END */;;
 DELIMITER ;
@@ -282,11 +283,11 @@ INSERT INTO `warehouses` VALUES ('WH01','Склад 1, Москва'),('WH02','�
 UNLOCK TABLES;
 
 --
--- Dumping events for database 'shop'
+-- Dumping events for database 'dd'
 --
 
 --
--- Dumping routines for database 'shop'
+-- Dumping routines for database 'dd'
 --
 /*!50003 DROP FUNCTION IF EXISTS `calculate_order_total` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -399,6 +400,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `make_order`(
 )
 BEGIN
     DECLARE order_id INT;
+    DECLARE product_price DECIMAL(10,2);
 
     -- Объявляем обработчик исключений
     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
@@ -412,33 +414,37 @@ BEGIN
     -- Начать транзакцию
     START TRANSACTION;
 
-    IF from_reserves = true THEN
-        -- Создаем новый заказ со склада
-        INSERT INTO orders (customers_id, order_datetime, order_status)
+    -- Получаем цену продукта
+    SELECT price INTO product_price FROM products WHERE id = product_id;
+
+    -- Если заказ из резерва
+    IF from_reserves = 1 THEN
+        -- Создаем новый заказ
+        INSERT INTO `orders` (customers_id, order_datetime, order_status)
         VALUES (customer_id, NOW(), 'processed');
 
         -- Получаем ID только что созданного заказа
         SET order_id = LAST_INSERT_ID();
 
-        -- Добавляем детали заказа
-        INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
-        VALUES (order_id, product_id, order_quantity, 1);
+        -- Добавляем детали заказа с total_price
+        INSERT INTO `order_details` (orders_id, products_id, quantity, from_reserves, total_price)
+        VALUES (order_id, product_id, order_quantity, 1, order_quantity * product_price);
     ELSE
         -- Уменьшаем количество продуктов в таблице products
-        UPDATE products
-        SET quantity = quantity - order_quantity
+        UPDATE `products`
+        SET `quantity` = `quantity` - order_quantity
         WHERE id = product_id;
 
         -- Создаем новый заказ
-        INSERT INTO orders (customers_id, order_datetime, order_status)
+        INSERT INTO `orders` (customers_id, order_datetime, order_status)
         VALUES (customer_id, NOW(), 'processed');
 
         -- Получаем ID только что созданного заказа
         SET order_id = LAST_INSERT_ID();
 
-        -- Добавляем детали заказа
-        INSERT INTO order_details (orders_id, products_id, quantity, from_reserves)
-        VALUES (order_id, product_id, order_quantity, 0);
+        -- Добавляем детали заказа с total_price
+        INSERT INTO `order_details` (orders_id, products_id, quantity, from_reserves, total_price)
+        VALUES (order_id, product_id, order_quantity, 0, order_quantity * product_price);
     END IF;
 
     -- Завершаем транзакцию
@@ -520,4 +526,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-19 13:34:19
+-- Dump completed on 2024-06-11 21:48:51
