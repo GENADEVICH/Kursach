@@ -48,6 +48,13 @@ FROM warehouses w
 LEFT JOIN reserves r ON w.code = r.warehouse_code
 GROUP BY w.location_name;
 ```
+
+# Хранимые процедуры
+
+# Представление
+
+# Функция
+
 ## Отдельные роли
 **1. Роль: Администратор**
 ```Mysql
